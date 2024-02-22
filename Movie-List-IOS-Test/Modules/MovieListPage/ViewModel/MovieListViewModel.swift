@@ -10,15 +10,17 @@ import UIKit
 class MovieListViewModel {
     
     var items = [MovieInfo]()
-    var service : MovieService
+    var movieService : MovieService
+    var imageDownloadService : ImageDownloadService
     
-    init(movieService : MovieService) {
-        self.service = movieService
+    init(movieService : MovieService, imageDownloadService : ImageDownloadService) {
+        self.movieService = movieService
+        self.imageDownloadService = imageDownloadService
     }
     
     func setNewMovieItems(query : String, completion : ((_ isSuccess : Bool)->())? = nil) {
         Task {
-            let result = await self.service.getMovieList(query : query)
+            let result = await self.movieService.getMovieList(query : query)
             switch result {
             case .success(let movieList):
                 guard let moviesInfo = movieList.results else {
@@ -59,5 +61,16 @@ class MovieListViewModel {
         }
         let urlString = APIConfig.posterBaseURL + path
         return URL(string: urlString)
+    }
+    
+    func getPosterImage(url : URL?, completion : @escaping (_ image : UIImage?)->()) {
+        guard let url = url else {
+            completion(nil)
+            return
+        }
+        Task {
+            let image = try await imageDownloadService.downloadImage(from: url)
+            completion(image)
+        }
     }
 }

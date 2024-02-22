@@ -4,7 +4,7 @@
 //
 //  Created by Sagar on 2/23/24.
 //
-// https://api.themoviedb.org/3/search/movie?api_key=3f575bd097b18aa6bd4bd1f7df9c973d&query=marvel
+
 
 import Foundation
 
@@ -39,10 +39,11 @@ extension MoviesEndpoint : Endpoint {
     var queryItems: [URLQueryItem]? {
         switch self {
         case .getMovieList(let query):
+            let validatedQuery  = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             let apiKey = APIConfig.apiKey
             return [
                 URLQueryItem(name: "api_key", value: apiKey),
-                URLQueryItem(name: "query", value: query)
+                URLQueryItem(name: "query", value: validatedQuery)
             ]
         }
     }

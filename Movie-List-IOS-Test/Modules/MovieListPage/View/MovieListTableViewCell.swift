@@ -19,6 +19,7 @@ class MovieListTableViewCell: UITableViewCell {
         super.awakeFromNib()
         overviewLabel.lineBreakMode = .byWordWrapping;
         overviewLabel.numberOfLines = 0;
+        posterImageView.image = UIImage(named: "NoImage")
     }
     
     override func prepareForReuse() {

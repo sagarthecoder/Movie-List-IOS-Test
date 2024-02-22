@@ -11,11 +11,11 @@ class MovieListViewController: UIViewController {
 
     
     @IBOutlet weak var searchBar: UISearchBar!
-    
     @IBOutlet weak var tableView: UITableView!
     var isFirstTimeLoaded = true
     var viewModel : MovieListViewModel!
     let identifier = MovieListTableViewCell.className
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewModel()
@@ -27,13 +27,13 @@ class MovieListViewController: UIViewController {
             isFirstTimeLoaded = false
             view.layoutIfNeeded()
             setupViews()
-            tableView.layoutIfNeeded()
         }
     }
     
     private func setViewModel() {
         let service = MovieService()
-        viewModel = MovieListViewModel(movieService: service)
+        let imageDownloadService = ImageDownloadService()
+        viewModel = MovieListViewModel(movieService: service, imageDownloadService: imageDownloadService)
     }
     
     private func setupViews() {
@@ -49,7 +49,6 @@ class MovieListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
-//        tableView.estimatedRowHeight = 140
         tableView.reloadData()
     }
     
@@ -88,18 +87,27 @@ extension MovieListViewController : UITableViewDelegate {
         cell.layoutIfNeeded()
         cell.titleLabel.text = movieInfo.title
         cell.overviewLabel.text = movieInfo.overview
-        cell.titleLabel.sizeToFit()
-        cell.overviewLabel.sizeToFit()
+        let posterURL = viewModel.getPosterURL(path: movieInfo.posterPath)
+        let currentIndex = indexPath.row
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.viewModel.getPosterImage(url: posterURL) { image in
+                let finalImage = image ?? UIImage(named: "NoImage")
+                DispatchQueue.main.async {
+                    if currentIndex == indexPath.row {
+                        cell.posterImageView.image = finalImage
+                    }
+                }
+            }
+        }
         return cell
     }
     
 }
 
 extension MovieListViewController : UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-    }
-    
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         return true
     }
@@ -118,6 +126,5 @@ extension MovieListViewController : UISearchBarDelegate {
                 self.tableView.reloadData()
             }
         }
-        
     }
 }

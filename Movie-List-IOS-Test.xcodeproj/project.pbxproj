@@ -27,6 +27,8 @@
 		1BBAC43B2B87E15F003B2800 /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAC43A2B87E15F003B2800 /* MovieListViewModel.swift */; };
 		1BBAC43E2B87E58A003B2800 /* MovieListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAC43C2B87E58A003B2800 /* MovieListTableViewCell.swift */; };
 		1BBAC43F2B87E58A003B2800 /* MovieListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BBAC43D2B87E58A003B2800 /* MovieListTableViewCell.xib */; };
+		1BBAC4452B880680003B2800 /* ImageDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAC4442B880680003B2800 /* ImageDownloadService.swift */; };
+		1BBAC4492B8806F6003B2800 /* ImageCachingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAC4482B8806F6003B2800 /* ImageCachingManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		1BBAC43A2B87E15F003B2800 /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
 		1BBAC43C2B87E58A003B2800 /* MovieListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListTableViewCell.swift; sourceTree = "<group>"; };
 		1BBAC43D2B87E58A003B2800 /* MovieListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieListTableViewCell.xib; sourceTree = "<group>"; };
+		1BBAC4442B880680003B2800 /* ImageDownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadService.swift; sourceTree = "<group>"; };
+		1BBAC4482B8806F6003B2800 /* ImageCachingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCachingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 		1BBAC4012B87A38F003B2800 /* Movie-List-IOS-Test */ = {
 			isa = PBXGroup;
 			children = (
+				1BBAC4462B8806C9003B2800 /* Helpers */,
 				1BBAC4402B87F234003B2800 /* Util */,
 				1BBAC4372B87E02F003B2800 /* Extensions */,
 				1BBAC42A2B87D8AC003B2800 /* APIConfig */,
@@ -175,6 +180,7 @@
 		1BBAC4262B87D61C003B2800 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				1BBAC4422B880641003B2800 /* ImageDownloadService */,
 				1BBAC4272B87D625003B2800 /* MovieAPIService */,
 			);
 			path = Services;
@@ -219,6 +225,30 @@
 				1BBAC40B2B87A392003B2800 /* Assets.xcassets */,
 			);
 			path = XCAssets;
+			sourceTree = "<group>";
+		};
+		1BBAC4422B880641003B2800 /* ImageDownloadService */ = {
+			isa = PBXGroup;
+			children = (
+				1BBAC4442B880680003B2800 /* ImageDownloadService.swift */,
+			);
+			path = ImageDownloadService;
+			sourceTree = "<group>";
+		};
+		1BBAC4462B8806C9003B2800 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1BBAC4472B8806D4003B2800 /* ImageCachingManager */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		1BBAC4472B8806D4003B2800 /* ImageCachingManager */ = {
+			isa = PBXGroup;
+			children = (
+				1BBAC4482B8806F6003B2800 /* ImageCachingManager.swift */,
+			);
+			path = ImageCachingManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BBAC41A2B87B628003B2800 /* RequestError.swift in Sources */,
+				1BBAC4452B880680003B2800 /* ImageDownloadService.swift in Sources */,
 				1BBAC4032B87A38F003B2800 /* AppDelegate.swift in Sources */,
 				1BBAC4352B87DE9E003B2800 /* MovieListViewController.swift in Sources */,
 				1BBAC43B2B87E15F003B2800 /* MovieListViewModel.swift in Sources */,
@@ -304,6 +335,7 @@
 				1BBAC4202B87B7FE003B2800 /* HTTPClient.swift in Sources */,
 				1BBAC4392B87E053003B2800 /* NSObject+Extension.swift in Sources */,
 				1BBAC42C2B87D8D0003B2800 /* APIConfig.swift in Sources */,
+				1BBAC4492B8806F6003B2800 /* ImageCachingManager.swift in Sources */,
 				1BBAC4052B87A38F003B2800 /* SceneDelegate.swift in Sources */,
 				1BBAC41E2B87B6C6003B2800 /* RequestMethod.swift in Sources */,
 				1BBAC4322B87DB29003B2800 /* MovieInfo.swift in Sources */,
